@@ -1,8 +1,5 @@
 package com.rhull.podiumuiautomation.webdriver;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,13 +7,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 import com.opera.core.systems.OperaDriver;
-import com.rhull.podiumuiautomation.util.Browser;
 import com.rhull.podiumuiautomation.webdriver.AuthenticatedHtmlUnitDriver;
 
 /*
@@ -106,42 +101,6 @@ public class WebDriverFactory {
 		}
 
 		return webDriver;
-	}
-
-	/*
-	 * Helper method to set version and platform for a specific browser
-	 * 
-	 * @param capability : DesiredCapabilities object coming from the selected
-	 * browser
-	 * 
-	 * @param version : browser version
-	 * 
-	 * @param platform : browser platform
-	 * 
-	 * @return DesiredCapabilities
-	 */
-	private static DesiredCapabilities setVersionAndPlatform(
-			DesiredCapabilities capability, String version, String platform) {
-		if (MAC.equalsIgnoreCase(platform)) {
-			capability.setPlatform(Platform.MAC);
-		} else if (LINUX.equalsIgnoreCase(platform)) {
-			capability.setPlatform(Platform.LINUX);
-		} else if (XP.equalsIgnoreCase(platform)) {
-			capability.setPlatform(Platform.XP);
-		} else if (VISTA.equalsIgnoreCase(platform)) {
-			capability.setPlatform(Platform.VISTA);
-		} else if (WINDOWS.equalsIgnoreCase(platform)) {
-			capability.setPlatform(Platform.WINDOWS);
-		} else if (ANDROID.equalsIgnoreCase(platform)) {
-			capability.setPlatform(Platform.ANDROID);
-		} else {
-			capability.setPlatform(Platform.ANY);
-		}
-
-		if (version != null) {
-			capability.setVersion(version);
-		}
-		return capability;
 	}
 
 	/*

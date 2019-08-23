@@ -2,27 +2,29 @@ package com.rhull.podiumuiautomation.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.How;
 
-/*
- * Sample page
- * 
- * @author Sebastiano Armeli-Battana
- */
+
 public class HomePage extends Page {
 
 	private final String H2_TAG = "//*[@id=\"slider\"]/div/div[1]/div/div/h2";
 	private final String LOGIN_MENU_ITEM = "#menu-item-1317 > a";
 	private final String EMAIL_OR_PHONE_FIELD = "//*[@id=\"login\"]/form/div[1]/input";
 	private final String PASSWORD_FIELD = "//*[@id=\"login\"]/form/div[2]/input";
-	private final String GET_HELP_SIGNING_IN_BUTTON = "//*[@id=\"login\"]/form/button/div/span";
-	private final String CLICK_ON_SEND_CODE_BUTTON = "//*[@id=\"login\"]/form/button/div/span";
-	private final String WATCH_DEMO_BUTTON = "//*[@id=\"login\"]/form/button/div/span";
-	private final String REVIEWS_PAGE_BUTTON = "//*[@id=\"login\"]/form/button/div/span";
-	private final String CONTACT_BUBBLE_ICON = "//*[@id=\"login\"]/form/button/div/span";
+	private final String GET_HELP_SIGNING_IN_BUTTON = "//*[@id=\"login\"]/form/div[3]/a";
+	private final String CLICK_ON_SEND_CODE_BUTTON = "//*[@id=\"request-code\"]/form/button/div/span/span";
+	private final String WATCH_DEMO_BUTTON = "//*[@id=\"slider\"]/div/div[1]/div/div/div[2]/a";
+	private final String REVIEWS_PAGE_BUTTON = "//*[@id=\"menu-item-1312\"]/a";
+	private final String LEADS_MENU_ITEM = "//*[@id=\"menu-item-1309\"]/a";
+	private final String WEB_CHAT_MENU_ITEM = "//*[@id=\"menu-item-1313\"]";
+	private final String TEAM_CHAT_MENU_BUTTON = "//*[@id=\"menu-item-1350\"]";
+	private final String CUSTOMERS_MENU_ITEM = "//*[@id=\"menu-item-1314\"]/a";
+	private final String FEEDBACK_MENU_ITEM = "//*[@id=\"menu-item-1354\"]";
+	private final String CONTACT_BUBBLE_ICON = "//*[@id=\"main\"]/div/div/div/div/button/div";
 	
 	@FindBys({
 		@FindBy(how = How.XPATH, using = H2_TAG),
@@ -33,6 +35,11 @@ public class HomePage extends Page {
 		@FindBy(how = How.XPATH, using = CLICK_ON_SEND_CODE_BUTTON),
 		@FindBy(how = How.XPATH, using = WATCH_DEMO_BUTTON),
 		@FindBy(how = How.XPATH, using = REVIEWS_PAGE_BUTTON),
+		@FindBy(how = How.XPATH, using = LEADS_MENU_ITEM),
+		@FindBy(how = How.XPATH, using = WEB_CHAT_MENU_ITEM),
+		@FindBy(how = How.XPATH, using = TEAM_CHAT_MENU_BUTTON),
+		@FindBy(how = How.XPATH, using = CUSTOMERS_MENU_ITEM),
+		@FindBy(how = How.XPATH, using = FEEDBACK_MENU_ITEM),
 		@FindBy(how = How.XPATH, using = CONTACT_BUBBLE_ICON)
 	})
 
@@ -47,6 +54,11 @@ public class HomePage extends Page {
 	private WebElement watchDemoButton;
 	private WebElement reviewsPageButton;
 	private WebElement contactBubbleIcon;
+	private WebElement leadsMenuItem;
+	private WebElement webChatMenuItem;
+	private WebElement teamChatMenuItem;
+	private WebElement customersMenuItem;
+	private WebElement feedbackMenuItem;
 	public ContactBubble contactBubble;
 	
 	public HomePage(WebDriver webDriver) {
@@ -116,11 +128,34 @@ public class HomePage extends Page {
 	}
 	
 	public void navigateToReviewsPage() {
+		//Hover over
+		//find element
 		reviewsPageButton.click();
 	}
 	
 	public void navigateToWebChatPage() {
-		we
+		Actions actions = new Actions(webDriver);
+		
+		actions.moveToElement(leadsMenuItem).perform();
+		actions.moveToElement(webChatMenuItem).perform();
+		webChatMenuItem.click();
+	}
+	
+	
+	public void navigateToTeamChatPage() {
+		Actions actions = new Actions(webDriver);
+		
+		actions.moveToElement(leadsMenuItem).perform();
+		actions.moveToElement(teamChatMenuItem).perform();
+		teamChatMenuItem.click();
+	}
+	
+	public void navigateToFeedbackTestPage() {
+		Actions actions = new Actions(webDriver);
+		
+		actions.moveToElement(customersMenuItem).perform();
+		actions.moveToElement(feedbackMenuItem).perform();
+		feedbackMenuItem.click();
 	}
 
 }
