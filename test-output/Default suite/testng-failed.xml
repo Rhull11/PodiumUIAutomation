@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
-  <parameter name="path" value="param-val-not-found"/>
-  <parameter name="password" value="param-val-not-found"/>
-  <parameter name="email" value="param-val-not-found"/>
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
       <class name="com.rhull.podiumuiautomation.pages.HomePageTest">
         <methods>
+          <include name="navigateToWatchDemoTest"/>
           <include name="testInit"/>
+          <include name="navigateToTeamChatPageTest"/>
           <include name="tearDown"/>
-          <include name="loginWithIncorrectCredentailsTest" invocation-numbers="0"/>
+          <include name="contactBubbleFormTest"/>
+          <include name="getHelpSigningInTest"/>
+          <include name="navigatToFeedbackTest"/>
+          <include name="navigateToReviewsPageTest"/>
+          <include name="loginWithIncorrectCredentailsTest"/>
+          <include name="navigateToWebChatPageTest"/>
           <include name="init"/>
         </methods>
       </class> <!-- com.rhull.podiumuiautomation.pages.HomePageTest -->

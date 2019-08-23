@@ -1,19 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
-  <parameter name="path" value="param-val-not-found"/>
-  <parameter name="password" value="param-val-not-found"/>
-  <parameter name="email" value="param-val-not-found"/>
-  <test name="Default test(failed)">
+<suite guice-stage="DEVELOPMENT" verbose="5" name="Failed suite [Tests]" data-provider-thread-count="1">
+  <parameter name="path" value="/"/>
+  <parameter name="password" value="abc123"/>
+  <parameter name="email" value="rachael.hull@hotmail.com"/>
+  <test name="Test1(failed)">
+    <parameter name="path" value="/"/>
     <classes>
       <class name="com.rhull.podiumuiautomation.pages.HomePageTest">
         <methods>
+          <include name="navigatToFeedbackTest"/>
+          <include name="navigateToReviewsPageTest"/>
+          <include name="navigateToWebChatPageTest"/>
+          <include name="navigateToWatchDemoTest"/>
           <include name="testInit"/>
+          <include name="testInit"/>
+          <include name="navigateToTeamChatPageTest"/>
           <include name="tearDown"/>
-          <include name="loginWithIncorrectCredentailsTest" invocation-numbers="0"/>
+          <include name="contactBubbleFormTest"/>
+          <include name="getHelpSigningInTest"/>
+          <include name="loginWithIncorrectCredentailsTest"/>
+          <include name="init"/>
           <include name="init"/>
         </methods>
       </class> <!-- com.rhull.podiumuiautomation.pages.HomePageTest -->
     </classes>
-  </test> <!-- Default test(failed) -->
-</suite> <!-- Failed suite [Default suite] -->
+  </test> <!-- Test1(failed) -->
+  <test name="loginWithIncorrectCredentailsTest(failed)">
+    <parameter name="password" value="abc123"/>
+    <parameter name="email" value="rachael.hull@hotmail.com"/>
+    <classes>
+      <class name="com.rhull.podiumuiautomation.pages.HomePageTest">
+        <methods>
+          <include name="testInit"/>
+          <include name="testInit"/>
+          <include name="tearDown"/>
+          <include name="loginWithIncorrectCredentailsTest" invocation-numbers="0"/>
+          <include name="init"/>
+          <include name="init"/>
+        </methods>
+      </class> <!-- com.rhull.podiumuiautomation.pages.HomePageTest -->
+    </classes>
+  </test> <!-- loginWithIncorrectCredentailsTest(failed) -->
+</suite> <!-- Failed suite [Tests] -->

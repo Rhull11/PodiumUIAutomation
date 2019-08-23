@@ -69,31 +69,31 @@ public class HomePageTest extends TestBase {
 	 * Navigation tests to pages that may be important to potential customers.
 	 */
 	@Test
-	public void navigateToWatchDemoTest(String email, String password) throws InterruptedException {
+	public void navigateToWatchDemoTest() throws InterruptedException {
 		homepage.clickWatchDemoButton();
 		Assert.assertEquals(websiteUrl, "https://learn.podium.com/watch");
 	}
 	
 	@Test
-	public void navigateToReviewsPageTest(String email, String password) throws InterruptedException {
+	public void navigateToReviewsPageTest() throws InterruptedException {
 		homepage.navigateToReviewsPage();
 		Assert.assertEquals(websiteUrl, "https://www.podium.com/reviews/");
 	}
 	
 	@Test
-	public void navigateToWebChatPageTest(String email, String password) throws InterruptedException {
+	public void navigateToWebChatPageTest() throws InterruptedException {
 		homepage.navigateToWebChatPage();
 		Assert.assertEquals(websiteUrl, "https://www.podium.com/webchat/");
 	}
 	
 	@Test
-	public void navigateToTeamChatPageTest(String email, String password) throws InterruptedException {
+	public void navigateToTeamChatPageTest() throws InterruptedException {
 		homepage.navigateToTeamChatPage();
 		Assert.assertEquals(websiteUrl, "https://www.podium.com/reviews/");
 	}
 	
 	@Test
-	public void navigatToFeedbackTest(String email, String password) throws InterruptedException {
+	public void navigatToFeedbackTest() throws InterruptedException {
 		homepage.navigateToFeedbackTestPage();
 		Assert.assertEquals(websiteUrl, "https://www.podium.com/reviews/");
 	}
