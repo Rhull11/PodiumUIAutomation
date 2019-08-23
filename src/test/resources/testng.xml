@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Tests" verbose="5" data-provider-thread-count="1">
+	<test name="Test1">
+		<parameter name="path" value="/"/>
+		<classes>
+		    <class name="com.rhull.podiumuiautomation.pages.HomePageTest"/>
+		</classes>
+	</test>
+	<test name="loginWithIncorrectCredentailsTest">
+		<parameter name="email" value="rachael.hull@hotmail.com"/>
+		<parameter name="password" value="abc123"/>
+		<classes>
+		    <class name="com.rhull.podiumuiautomation.pages.HomePageTest">
+		    	<methods>
+		    	<include name="loginWithIncorrectCredentailsTest"/>
+		    	</methods>
+		    </class>
+		</classes>
+	</test>  
+</suite>
