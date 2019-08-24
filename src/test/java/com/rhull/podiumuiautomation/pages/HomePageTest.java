@@ -27,6 +27,9 @@ public class HomePageTest extends TestBase {
 		Assert.assertTrue(homepage.isDisabledButtonShowing());
 	}
 	
+	/*
+	 * Test to get help to sign in
+	 */
 	@Parameters({ "email" })
 	@Test
 	public void getHelpSigningInTest(String email) throws InterruptedException {
