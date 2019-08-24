@@ -1,5 +1,5 @@
 # Podium Website UI Automation Test Suite and Framework
-An automated UI test suite and framework for the website https://www.podium.com/
+An automated UI test suite and framework for the website https://www.podium.com/ that utilizes TestNG and the PageObject pattern.
 
 # Configuration Notes
 This suite uses TestNG to run tests.
