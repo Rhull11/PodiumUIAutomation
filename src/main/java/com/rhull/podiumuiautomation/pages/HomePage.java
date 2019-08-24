@@ -6,19 +6,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.How;
-
 
 public class HomePage extends Page {
 
 	private final String H2_TAG = "//*[@id=\"slider\"]/div/div[1]/div/div/h2";
 	private final String LOGIN_MENU_ITEM = "menu-item-1317";
 	private final String EMAIL_OR_PHONE_FIELD = "//*[@id=\"login\"]/form/div[1]/input";
+	private final String REQUEST_EMAIL_OR_PHONE_FIELD = "//*[@id=\"request-code\"]/form/div[1]/input";
 	private final String PASSWORD_FIELD = "//*[@id=\"login\"]/form/div[2]/input";
 	private final String SIGN_IN_BUTTON = "login-btn";
+	private final String REQUEST_CODE_BUTTON = "//*[@id=\"request-code\"]/form/button";
 	private final String GET_HELP_SIGNING_IN_BUTTON = "//*[@id=\"login\"]/form/div[3]/a";
-	private final String CLICK_ON_SEND_CODE_BUTTON = "//*[@id=\"request-code\"]/form/button/div/span/span";
+	private final String SEND_CODE_BUTTON = "//*[@id=\"request-code\"]/form/button/div/span/span";
 	private final String WATCH_DEMO_BUTTON = "//*[@id=\"slider\"]/div/div[1]/div/div/div[2]/a";
 	private final String REVIEWS_PAGE_BUTTON = "//*[@id=\"menu-item-1312\"]/a";
 	private final String LEADS_MENU_ITEM = "//*[@id=\"menu-item-1309\"]/a";
@@ -27,29 +27,18 @@ public class HomePage extends Page {
 	private final String CUSTOMERS_MENU_ITEM = "//*[@id=\"menu-item-1314\"]/a";
 	private final String FEEDBACK_MENU_ITEM = "//*[@id=\"menu-item-1354\"]";
 	private final String CONTACT_BUBBLE_ICON = "//*[@id=\"main\"]/div/div/div/div/button/div";
-	
-	@FindBys({
-		@FindBy(how = How.XPATH, using = H2_TAG),	
-		
-		
-		@FindBy(how = How.XPATH, using = CLICK_ON_SEND_CODE_BUTTON),
-		@FindBy(how = How.XPATH, using = WATCH_DEMO_BUTTON),
-		@FindBy(how = How.XPATH, using = REVIEWS_PAGE_BUTTON),
-		@FindBy(how = How.XPATH, using = LEADS_MENU_ITEM),
-		@FindBy(how = How.XPATH, using = WEB_CHAT_MENU_ITEM),
-		@FindBy(how = How.XPATH, using = TEAM_CHAT_MENU_BUTTON),
-		@FindBy(how = How.XPATH, using = CUSTOMERS_MENU_ITEM),
-		@FindBy(how = How.XPATH, using = FEEDBACK_MENU_ITEM),
-		@FindBy(how = How.XPATH, using = CONTACT_BUBBLE_ICON)
-	})
 
 	@CacheLookup
+	@FindBy(how = How.ID, using = H2_TAG)
 	private WebElement h2Element;
 	
 	@FindBy(how = How.ID, using = LOGIN_MENU_ITEM)
 	private WebElement loginMenuItem;
 	
-	@FindBy(how = How.XPATH, using = EMAIL_OR_PHONE_FIELD)
+	@FindBy(how = How.NAME, using = REQUEST_EMAIL_OR_PHONE_FIELD)
+	private WebElement requestEmailOrPhoneField;
+	
+	@FindBy(how = How.NAME, using = EMAIL_OR_PHONE_FIELD)
 	private WebElement emailOrPhoneField;
 	
 	@FindBy(how = How.XPATH, using = PASSWORD_FIELD)
@@ -58,24 +47,44 @@ public class HomePage extends Page {
 	@FindBy(how = How.CLASS_NAME, using = SIGN_IN_BUTTON)
 	private WebElement signInButton;
 	
+	@FindBy(how = How.CLASS_NAME, using = REQUEST_CODE_BUTTON)
+	private WebElement requestCodeButton;
+	
 	@FindBy(how = How.XPATH, using = GET_HELP_SIGNING_IN_BUTTON)
 	private WebElement getHelpSigningInButton;
-	private WebElement clickOnSendCodeButton;
+	
+	@FindBy(how = How.XPATH, using = SEND_CODE_BUTTON)
+	private WebElement sendCodeButton;
+	
+	@FindBy(how = How.XPATH, using = WATCH_DEMO_BUTTON)
 	private WebElement watchDemoButton;
-	private WebElement reviewsPageButton;
+	
+	@FindBy(how = How.XPATH, using = REVIEWS_PAGE_BUTTON)
+	private WebElement reviewsMenuItem;
+	
+	@FindBy(how = How.XPATH, using = CONTACT_BUBBLE_ICON)
 	private WebElement contactBubbleIcon;
+	
+	@FindBy(how = How.XPATH, using = LEADS_MENU_ITEM)
 	private WebElement leadsMenuItem;
+	
+	@FindBy(how = How.XPATH, using = WEB_CHAT_MENU_ITEM)
 	private WebElement webChatMenuItem;
+	
+	@FindBy(how = How.XPATH, using = TEAM_CHAT_MENU_BUTTON)
 	private WebElement teamChatMenuItem;
+	
+	@FindBy(how = How.XPATH, using = CUSTOMERS_MENU_ITEM)
 	private WebElement customersMenuItem;
+	
+	@FindBy(how = How.XPATH, using = FEEDBACK_MENU_ITEM)
 	private WebElement feedbackMenuItem;
-	public ContactBubble contactBubble;
 	
 	public HomePage(WebDriver webDriver) {
 		super(webDriver);
 	}
 	
-	public String getH1() {
+	public String getH2() {
 		return h2Element.getText();
 	}
 	
@@ -91,6 +100,10 @@ public class HomePage extends Page {
 		emailOrPhoneField.sendKeys(emailOrPhone);
 	}
 	
+	public void typeInEmailOrPhonePasswordRequest(String emailOrPhone) {
+		requestEmailOrPhoneField.sendKeys(emailOrPhone);
+	}
+	
 	public void typeInPassword(String password) {
 		passwordField.sendKeys(password);
 	}
@@ -98,6 +111,15 @@ public class HomePage extends Page {
 	public boolean isDisabledButtonShowing() {
 		String errorButtonClassName = signInButton.getAttribute("class");
 		if(errorButtonClassName.equals("login-btn error")) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public boolean isRequestButtonDisabledShowing() {
+		String errorButtonClassName = requestCodeButton.getAttribute("class");
+		if(errorButtonClassName.equals("error")) {
 			return true;
 		}else {
 			return false;
@@ -125,13 +147,13 @@ public class HomePage extends Page {
 	}
 	
 	public void navigateToGetHelpSigningIn() {
-		loginMenuItem.click();
+		loginMenuItem.findElement(By.linkText("Login")).click();
 		getHelpSigningInButton.click();
 	}
 	
 	public void clickOnSendCodeButton() {
 		loginMenuItem.click();
-		clickOnSendCodeButton.click();
+		sendCodeButton.click();
 	}
 	
 	public void clickWatchDemoButton() {
@@ -139,9 +161,11 @@ public class HomePage extends Page {
 	}
 	
 	public void navigateToReviewsPage() {
-		//Hover over
-		//find element
-		reviewsPageButton.click();
+		Actions actions = new Actions(webDriver);
+		
+		actions.moveToElement(leadsMenuItem).perform();
+		actions.moveToElement(reviewsMenuItem).perform();
+		reviewsMenuItem.click();
 	}
 	
 	public void navigateToWebChatPage() {
@@ -151,7 +175,6 @@ public class HomePage extends Page {
 		actions.moveToElement(webChatMenuItem).perform();
 		webChatMenuItem.click();
 	}
-	
 	
 	public void navigateToTeamChatPage() {
 		Actions actions = new Actions(webDriver);

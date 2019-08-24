@@ -60,6 +60,7 @@ public class WebDriverFactory {
 			setChromeDriver();
 
 			webDriver = new ChromeDriver();
+
 		} else if (FIREFOX.equals(browser)) {
 
 			FirefoxProfile ffProfile = new FirefoxProfile();

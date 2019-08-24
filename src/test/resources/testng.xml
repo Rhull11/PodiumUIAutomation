@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Tests" verbose="5" data-provider-thread-count="1">
-	<test name="ParameterizedTests">
+	<test name="incorrectCredentials">
 		<parameter name="email" value="rachael.hull@hotmail.com"/>
 		<parameter name="password" value="abc123"/>
 		<classes>
@@ -11,5 +11,65 @@
 		    	</methods>
 		    </class>
 		</classes>
-	</test>  
+	</test>
+	<test name="getHelpSigningIn">
+		<parameter name="email" value="rachael.hull@hotmail.com"/>
+		<classes>
+		    <class name="com.rhull.podiumuiautomation.pages.HomePageTest">
+		    	<methods>
+		    		<include name="getHelpSigningInTest"/>
+		    	</methods>
+		    </class>
+		</classes>
+	</test>
+	<test name="navigateToWatchDemoTest">
+		<parameter name="url" value="https://learn.podium.com/watch"/>
+		<classes>
+		    <class name="com.rhull.podiumuiautomation.pages.HomePageTest">
+		    	<methods>
+		    		<include name="navigateToWatchDemoTest"/>
+		    	</methods>
+		    </class>
+		</classes>
+	</test>
+		<test name="navigateToReviewsPageTest">
+		<parameter name="url" value="https://www.podium.com/reviews/"/>
+		<classes>
+		    <class name="com.rhull.podiumuiautomation.pages.HomePageTest">
+		    	<methods>
+		    		<include name="navigateToReviewsPageTest"/>
+		    	</methods>
+		    </class>
+		</classes>
+	</test>
+		<test name="navigateToWebChatPageTest">
+		<parameter name="url" value="https://www.podium.com/webchat/"/>
+		<classes>
+		    <class name="com.rhull.podiumuiautomation.pages.HomePageTest">
+		    	<methods>
+		    		<include name="navigateToWebChatPageTest"/>
+		    	</methods>
+		    </class>
+		</classes>
+	</test>
+		<test name="navigateToTeamChatPageTest">
+		<parameter name="url" value="https://www.podium.com/teamchat-leads/"/>
+		<classes>
+		    <class name="com.rhull.podiumuiautomation.pages.HomePageTest">
+		    	<methods>
+		    		<include name="navigateToTeamChatPageTest"/>
+		    	</methods>
+		    </class>
+		</classes>
+	</test>
+		<test name="navigatToFeedbackTest">
+		<parameter name="url" value="https://www.podium.com/feedback/"/>
+		<classes>
+		    <class name="com.rhull.podiumuiautomation.pages.HomePageTest">
+		    	<methods>
+		    		<include name="navigatToFeedbackTest"/>
+		    	</methods>
+		    </class>
+		</classes>
+	</test>
 </suite>
