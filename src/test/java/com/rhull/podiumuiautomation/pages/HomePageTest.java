@@ -4,7 +4,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -12,9 +11,8 @@ public class HomePageTest extends TestBase {
 
 	HomePage homepage;
 	
-	@Parameters({ "path" })
 	@BeforeClass
-	public void testInit(@Optional String path) {
+	public void testInit() {
 
 		webDriver.get(websiteUrl);
 		homepage = PageFactory.initElements(webDriver, HomePage.class);
@@ -23,17 +21,12 @@ public class HomePageTest extends TestBase {
 	@Parameters({ "email", "password" })
 	@Test
 	public void loginWithIncorrectCredentailsTest(String email, String password) throws InterruptedException {
-		if(homepage.getLoginMenuItem() != null) {
-			homepage.navigateToLoginPage();
-		}else{
-			Reporter.log("could not access the login button to log in.");
-			webDriver.close();
-		}
-		webDriver.get(websiteUrl);
-			homepage.typeInEmailOrPhone(email);
-			homepage.typeInPassword(password);
-			homepage.clickSignInButton();
-			Assert.assertTrue(homepage.isDisabledButtonShowing());
+		homepage.navigateToLoginPage();
+		homepage.typeInEmailOrPhone(email);
+		homepage.typeInPassword(password);
+		homepage.clickSignInButton();
+		
+		Assert.assertTrue(homepage.isDisabledButtonShowing());
 	}
 	
 	@Parameters({ "email" })

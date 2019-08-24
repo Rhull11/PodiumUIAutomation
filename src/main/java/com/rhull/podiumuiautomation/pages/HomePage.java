@@ -1,5 +1,6 @@
 package com.rhull.podiumuiautomation.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -12,9 +13,10 @@ import org.openqa.selenium.support.How;
 public class HomePage extends Page {
 
 	private final String H2_TAG = "//*[@id=\"slider\"]/div/div[1]/div/div/h2";
-	private final String LOGIN_MENU_ITEM = "#menu-item-1317 > a";
+	private final String LOGIN_MENU_ITEM = "menu-item-1317";
 	private final String EMAIL_OR_PHONE_FIELD = "//*[@id=\"login\"]/form/div[1]/input";
 	private final String PASSWORD_FIELD = "//*[@id=\"login\"]/form/div[2]/input";
+	private final String SIGN_IN_BUTTON = "login-btn";
 	private final String GET_HELP_SIGNING_IN_BUTTON = "//*[@id=\"login\"]/form/div[3]/a";
 	private final String CLICK_ON_SEND_CODE_BUTTON = "//*[@id=\"request-code\"]/form/button/div/span/span";
 	private final String WATCH_DEMO_BUTTON = "//*[@id=\"slider\"]/div/div[1]/div/div/div[2]/a";
@@ -27,11 +29,9 @@ public class HomePage extends Page {
 	private final String CONTACT_BUBBLE_ICON = "//*[@id=\"main\"]/div/div/div/div/button/div";
 	
 	@FindBys({
-		@FindBy(how = How.XPATH, using = H2_TAG),
-		@FindBy(how = How.CSS, using = LOGIN_MENU_ITEM),
-		@FindBy(how = How.XPATH, using = EMAIL_OR_PHONE_FIELD),
-		@FindBy(how = How.XPATH, using = PASSWORD_FIELD),
-		@FindBy(how = How.XPATH, using = GET_HELP_SIGNING_IN_BUTTON),
+		@FindBy(how = How.XPATH, using = H2_TAG),	
+		
+		
 		@FindBy(how = How.XPATH, using = CLICK_ON_SEND_CODE_BUTTON),
 		@FindBy(how = How.XPATH, using = WATCH_DEMO_BUTTON),
 		@FindBy(how = How.XPATH, using = REVIEWS_PAGE_BUTTON),
@@ -45,10 +45,20 @@ public class HomePage extends Page {
 
 	@CacheLookup
 	private WebElement h2Element;
+	
+	@FindBy(how = How.ID, using = LOGIN_MENU_ITEM)
 	private WebElement loginMenuItem;
+	
+	@FindBy(how = How.XPATH, using = EMAIL_OR_PHONE_FIELD)
 	private WebElement emailOrPhoneField;
+	
+	@FindBy(how = How.XPATH, using = PASSWORD_FIELD)
 	private WebElement passwordField;
+	
+	@FindBy(how = How.CLASS_NAME, using = SIGN_IN_BUTTON)
 	private WebElement signInButton;
+	
+	@FindBy(how = How.XPATH, using = GET_HELP_SIGNING_IN_BUTTON)
 	private WebElement getHelpSigningInButton;
 	private WebElement clickOnSendCodeButton;
 	private WebElement watchDemoButton;
@@ -74,7 +84,7 @@ public class HomePage extends Page {
 	}
 	
 	public void navigateToLoginPage() {
-		loginMenuItem.click();
+		loginMenuItem.findElement(By.linkText("Login")).click();;
 	}
 	
 	public void typeInEmailOrPhone(String emailOrPhone) {
@@ -86,7 +96,8 @@ public class HomePage extends Page {
 	}
 	
 	public boolean isDisabledButtonShowing() {
-		if(signInButton.getAttribute("disabled") == "true") {
+		String errorButtonClassName = signInButton.getAttribute("class");
+		if(errorButtonClassName.equals("login-btn error")) {
 			return true;
 		}else {
 			return false;
