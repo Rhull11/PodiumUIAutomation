@@ -62,7 +62,7 @@
 		    </class>
 		</classes>
 	</test>
-		<test name="navigatToFeedbackTest">
+		<test name="navigateToFeedbackTest">
 		<parameter name="url" value="https://www.podium.com/feedback/"/>
 		<classes>
 		    <class name="com.rhull.podiumuiautomation.pages.HomePageTest">

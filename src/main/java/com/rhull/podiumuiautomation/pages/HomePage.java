@@ -16,9 +16,8 @@ public class HomePage extends Page {
 	private final String REQUEST_EMAIL_OR_PHONE_FIELD = "//*[@id=\"request-code\"]/form/div[1]/input";
 	private final String PASSWORD_FIELD = "//*[@id=\"login\"]/form/div[2]/input";
 	private final String SIGN_IN_BUTTON = "login-btn";
-	private final String REQUEST_CODE_BUTTON = "//*[@id=\"request-code\"]/form/button";
 	private final String GET_HELP_SIGNING_IN_BUTTON = "//*[@id=\"login\"]/form/div[3]/a";
-	private final String SEND_CODE_BUTTON = "//*[@id=\"request-code\"]/form/button/div/span/span";
+	private final String SEND_CODE_BUTTON = "//*[@id=\"request-code\"]/form/button";
 	private final String WATCH_DEMO_BUTTON = "//*[@id=\"slider\"]/div/div[1]/div/div/div[2]/a";
 	private final String REVIEWS_PAGE_BUTTON = "//*[@id=\"menu-item-1312\"]/a";
 	private final String LEADS_MENU_ITEM = "//*[@id=\"menu-item-1309\"]/a";
@@ -26,7 +25,7 @@ public class HomePage extends Page {
 	private final String TEAM_CHAT_MENU_BUTTON = "//*[@id=\"menu-item-1350\"]";
 	private final String CUSTOMERS_MENU_ITEM = "//*[@id=\"menu-item-1314\"]/a";
 	private final String FEEDBACK_MENU_ITEM = "//*[@id=\"menu-item-1354\"]";
-	private final String CONTACT_BUBBLE_ICON = "//*[@id=\"main\"]/div/div/div/div/button/div";
+	private final String SEND_SMS_PAGE = "//*[@id=\"main\"]/div/div/div/div/div/div/form";
 
 	@CacheLookup
 	@FindBy(how = How.ID, using = H2_TAG)
@@ -35,10 +34,10 @@ public class HomePage extends Page {
 	@FindBy(how = How.ID, using = LOGIN_MENU_ITEM)
 	private WebElement loginMenuItem;
 	
-	@FindBy(how = How.NAME, using = REQUEST_EMAIL_OR_PHONE_FIELD)
+	@FindBy(how = How.XPATH, using = REQUEST_EMAIL_OR_PHONE_FIELD)
 	private WebElement requestEmailOrPhoneField;
 	
-	@FindBy(how = How.NAME, using = EMAIL_OR_PHONE_FIELD)
+	@FindBy(how = How.XPATH, using = EMAIL_OR_PHONE_FIELD)
 	private WebElement emailOrPhoneField;
 	
 	@FindBy(how = How.XPATH, using = PASSWORD_FIELD)
@@ -46,9 +45,6 @@ public class HomePage extends Page {
 	
 	@FindBy(how = How.CLASS_NAME, using = SIGN_IN_BUTTON)
 	private WebElement signInButton;
-	
-	@FindBy(how = How.CLASS_NAME, using = REQUEST_CODE_BUTTON)
-	private WebElement requestCodeButton;
 	
 	@FindBy(how = How.XPATH, using = GET_HELP_SIGNING_IN_BUTTON)
 	private WebElement getHelpSigningInButton;
@@ -62,8 +58,8 @@ public class HomePage extends Page {
 	@FindBy(how = How.XPATH, using = REVIEWS_PAGE_BUTTON)
 	private WebElement reviewsMenuItem;
 	
-	@FindBy(how = How.XPATH, using = CONTACT_BUBBLE_ICON)
-	private WebElement contactBubbleIcon;
+	@FindBy(how = How.XPATH, using = SEND_SMS_PAGE)
+	private WebElement feedbackMenuItem;
 	
 	@FindBy(how = How.XPATH, using = LEADS_MENU_ITEM)
 	private WebElement leadsMenuItem;
@@ -78,7 +74,7 @@ public class HomePage extends Page {
 	private WebElement customersMenuItem;
 	
 	@FindBy(how = How.XPATH, using = FEEDBACK_MENU_ITEM)
-	private WebElement feedbackMenuItem;
+	private WebElement sendSmsPage;
 	
 	public HomePage(WebDriver webDriver) {
 		super(webDriver);
@@ -93,7 +89,7 @@ public class HomePage extends Page {
 	}
 	
 	public void navigateToLoginPage() {
-		loginMenuItem.findElement(By.linkText("Login")).click();;
+		loginMenuItem.click();
 	}
 	
 	public void typeInEmailOrPhone(String emailOrPhone) {
@@ -108,7 +104,8 @@ public class HomePage extends Page {
 		passwordField.sendKeys(password);
 	}
 	
-	public boolean isDisabledButtonShowing() {
+	public boolean isDisabledLoginButtonVisable() throws InterruptedException {
+		webDriver.findElement(By.className("error"));
 		String errorButtonClassName = signInButton.getAttribute("class");
 		if(errorButtonClassName.equals("login-btn error")) {
 			return true;
@@ -118,7 +115,8 @@ public class HomePage extends Page {
 	}
 	
 	public boolean isRequestButtonDisabledShowing() {
-		String errorButtonClassName = requestCodeButton.getAttribute("class");
+		webDriver.findElement(By.className("error"));
+		String errorButtonClassName = sendCodeButton.getAttribute("class");
 		if(errorButtonClassName.equals("error")) {
 			return true;
 		}else {
@@ -126,20 +124,8 @@ public class HomePage extends Page {
 		}
 	}
 	
-	public boolean isForgotLoginDetailsTextDisplayed() {
-		if(signInButton.getAttribute("disabled") == "true") {
-			return true;
-		}else {
-			return false;
-		}
-	}
-	
-	public void clickOnContactBubbleIcon() {
-		contactBubbleIcon.click();
-	}
-	
 	public String getContactBubbleIcon() {
-		return contactBubbleIcon.getAttribute("class");
+		return contactBubbleButton.getAttribute("class");
 	}
 	
 	public void clickSignInButton() {
@@ -147,12 +133,10 @@ public class HomePage extends Page {
 	}
 	
 	public void navigateToGetHelpSigningIn() {
-		loginMenuItem.findElement(By.linkText("Login")).click();
 		getHelpSigningInButton.click();
 	}
 	
 	public void clickOnSendCodeButton() {
-		loginMenuItem.click();
 		sendCodeButton.click();
 	}
 	
@@ -191,5 +175,4 @@ public class HomePage extends Page {
 		actions.moveToElement(feedbackMenuItem).perform();
 		feedbackMenuItem.click();
 	}
-
 }

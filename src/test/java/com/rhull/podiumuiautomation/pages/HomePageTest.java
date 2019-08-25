@@ -24,18 +24,15 @@ public class HomePageTest extends TestBase {
 		homepage.typeInEmailOrPhone(email);
 		homepage.typeInPassword(password);
 		homepage.clickSignInButton();
-		Assert.assertTrue(homepage.isDisabledButtonShowing());
+		Assert.assertTrue(homepage.isDisabledLoginButtonVisable());
 	}
 	
-	/*
-	 * Test to get help to sign in
-	 */
 	@Parameters({ "email" })
 	@Test
 	public void getHelpSigningInTest(String email) throws InterruptedException {
 		homepage.navigateToLoginPage();	
 		homepage.navigateToGetHelpSigningIn();
-		homepage.typeInEmailOrPhone(email);
+		homepage.typeInEmailOrPhonePasswordRequest(email);
 		homepage.clickOnSendCodeButton();
 		Assert.assertTrue(homepage.isRequestButtonDisabledShowing());
 	}
