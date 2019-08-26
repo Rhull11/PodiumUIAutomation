@@ -124,10 +124,6 @@ public class HomePage extends Page {
 		}
 	}
 	
-	public String getContactBubbleIcon() {
-		return contactBubbleButton.getAttribute("class");
-	}
-	
 	public void clickSignInButton() {
 		signInButton.click();
 	}
